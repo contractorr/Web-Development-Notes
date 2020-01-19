@@ -1,0 +1,39 @@
+* pwd will treat symlinked paths as if they were actual paths.
+  E.g. /users/rcontrac/abc/def instead of /users/rcontrac/Dropbox/abc/def
+* If we want to see the physical path with the symlinks resolved, use pwd -P
+* Hidden files are prefixed on linux with a '.'. To see these use ls -a
+* ls - l will list files alphabetically and give information on each one:
+** File mode
+** number of links
+** owner name
+** group name
+** bytes
+** date last modified
+** pathname -> symlinks
+** -h will give us size of files in Kb and Mb
+** -S will sort the results of ls by file size (biggest first)
+** -t will sort by last modified (recent first)
+** -r will reverse the results
+* mkdir
+** -p a/b/c allows you to create nested directories a/b/c
+** -v verbose
+* cp source destination
+** a.txt b.txt will copy a.txt and create a new file b.txt
+** cp a.txt a/b/c will copy a/txt to a/b/c
+** cp a.txt b.txt c.txt a/b/c will copy the three files to a/b/c
+** cp *.txt will achieve the same result as above
+** supports verbose output -v
+** to copy directories use -r command
+** use -f force command to overcome restrictions
+** use -i command when copying many files to be warned if you're overwriting an
+   existing file
+* rm will delete files and directories
+* mv will move files and directories. It is a combination of cp and rm.
+* We can use the pipeline operator | to redirect the output of one command into
+  another
+** ls -l ~ | grep _ will find all the files in your home directory with an
+   underscore.
+* ls -l ~ | grep _ > store.txt will write the outputs to store.txt
+* Open files in editor of your choice using for example atom file\ 1.txt or atom "file 1.txt"
+* Select all contents of a directory at once using the . command. E.g. atom ~/Documents/Python/Week\ 1/.
+

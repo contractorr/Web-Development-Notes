@@ -1,0 +1,99 @@
+Describe what the internet is.
+* An infrastructure of connected computers - through wires (copper/fiber obtic) or signals
+  (WiFi/Bluetooth)
+* Some of these computers can send messages intelligible to web browsers. These are called web
+  servers.
+* The Web is a service built on the internet infrastructure
+* IRC and email are other services built on the internet
+What is a client?
+* A typical computer
+* Computer that is indirectly connected to the internet via an ISP
+What is a Web Server?
+* Computer that is directly connected to the internet
+* Files on the harddrive are web pages
+* Also has a unique IP address, as with all computers on the internet
+* In the case of web servers, this IP address also has an alias called a domain name (e.g.
+  google.com)
+Describe what packets are and how they are used to transfer data.
+* Packets - each packet contains instructions on how it fits together,where it came from and where
+  it's going.
+* Modems turn information from networks into a form manageable by the telephone infrastructure and
+  vice versa.
+* An ISP is a company that manages some special routers that are all linked together and can
+  also access other ISPs' routers.
+  The message from our network is carried through the network of ISP networks to the destination
+  network.
+* Each computer on the internet has unique IP address which can be looked up using domain name
+  server (DNS - giant address book). When you type a web address in your browser, it looks at
+  the DNS to find the website's read address.
+* Each time two or more parts of the internet intersect, there will be a router. These Routers
+  guide packets to correct destination. 10-15 routers between client and server.
+* Each router has own IP address. The ip addresses of each router is added to your packet on
+  it's way to a server.
+* Servers send back packets with an identical wrapping. As it makes its way back, each router
+  unpacks a layer in order to find out where to send the packet next.
+What is a web page?
+* A HTML document that can be displayed in a web browser.
+* Accessible through a unique address within the domain name
+* A collection of web pages connected together form a website.
+What is a web browser?
+* A program on your computer that allows you to visit websites
+What is a search engine?
+* A web service that helps you find other web pages.
+What happens when you search for a web address?
+* The internet is like a road. Say you're sending Joe Smith to a shop. The DNS is like an address book.
+  When you enter a web address, the browser goes to the DNS server and finds the real address of the
+  server. This is like looking up the physical address of your shop. There'll be a local DNS cache on
+  your computer. The browser will check if it already knows the IP address. If it does it will skip the
+  DNS server request.
+* HTTP: Hypertext Transfer Protocol is an application protocol that defines a language for clients and
+  servers to speak to each other. The browser will send an HTTP request message to the server asking for
+  a copy of the website to the client. This is the equivalent of placing your order in English to Joe.
+* TCP/IP: Transmission Control Protocol and Internet Protocol are communication protocols that define
+  how data should travel across the web. Like types of vehicles - how Joe gets around on the roads.
+* Component files: A website is made up of many different files, which are like the different parts of
+  the goods you buy from the shop. These files come in two main types:
+** Code files: Websites are built primarily from HTML, CSS, and JavaScript
+** Assets: This is a collective name for all the other stuff that makes up a website, such as images,
+   music, video, Word documents, and PDFs.
+* If the server approves the client's request, the server sends the client a "200 OK" message and then
+  starts sending the website's files to the browser as a series of small chunks called data packets.
+* The browser assembles the small chunks into a complete website and displays it to you. The data is
+  sent as thousands of small chunks, so that many different web users can download the same website at
+  the same time.
+How are domain names structured?
+* TLD (Top-Level Domain)
+** TLDs tell users the general purpose of the service behind the domain name. The most generic TLDs
+   (.com, .org, .net) don't require web services to meet any particular criteria, but some TLDs enforce
+   stricter policies so it is clearer what their purpose is. For example:
+   - Local TLDs such as .us, .fr, or .se can require the service to be provided in a given language or
+     hosted in a certain country.
+   - TLDs containing .gov are only allowed to be used by government departments.
+   - TLDs like .edu and .ac.uk are only for use by educational and academic institutions.
+** TLDs can contain special as well as latin characters, and their maximum length is 63 characters
+* Label (or component)
+** The labels are what follow the TLD
+** A label is a case-insensitive character sequence anywhere from 1 to 63 characters in length,
+   containing only the letters A through Z, digits 0 through 9, and the - character (which may not be
+   the first or last character in the label).
+** The label located right before the TLD is called a Secondary Level Domain (SLD).
+* In developer.mozilla.org, developer and mozilla are labels, while org is the TLD
+* For any domain you control (e.g. mozilla.org), you can create "subdomains" with different content
+  located at each, like developer.mozilla.org, iot.mozilla.org, or wiki.developer.mozilla.org.
+* You pay for the right to use a domain name for one or more years. You can renew your right, and your
+  renewal has priority over other people's applications. But you never own the domain name.
+* Companies called registrars use domain name registries to keep track of technical and administrative
+  information connecting you to your domain name. For some domain name, it might not be a registrar
+  which is in charge of keeping track. For instance, every domain name under .fire is managed by Amazon.
+* To find out whether a given domain name is available:
+** Go to a domain name registrar's website. Most of them provide a “whois” service that tells you
+   whether a domain name is available.
+** Alternatively, if you use a system with a built-in shell, type a whois command into it, followed by
+   the domain name.
+* Go to a Regristrar's website to register a domain names
+* DNS databases are stored on every DNS server worldwide, and all these servers refer to a few special
+  servers called “authoritative name servers” or “top-level DNS servers.”  Whenever your registrar
+  creates or updates any information for a given domain, the information must be refreshed in every DNS
+  database. Each DNS server that knows about a given domain stores the information for some time before
+  it is refreshed. At this point the DNS server queries an authoritative server and fetches the updated
+  information from it). It takes a few hours for the information to refresh on all DNS servers.

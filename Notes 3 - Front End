@@ -1,0 +1,4 @@
+07:18:53 >> git config --global http.proxy http:
+07:20:17 >> git config --global https://github.com/rbenv/rbenv.git https://
+07:20:37 >> git clone httgit clone https://github.com/rbenv/rbenv.git ~/.rbenv
+

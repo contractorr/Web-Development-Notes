@@ -1,0 +1,57 @@
+* Other VCSs use delta-based version control. This stores changes as a set of
+  files and the changes made to each file over time.
+  V1              V2              V3              V4              V5
+  File A       Change_1                        Change_2
+  File B                                       Change_1        Change_2
+  File C       Change_1        Change_2                        Change_3
+* Git uses a stream of snapshots. Every time you commit, git takes a snapshots
+  and stores a reference to it. If files have not changed, Git only stores links
+  to the previous identical files it has already stored.
+  V1              V2              V3              V4              V5
+  File A          A1              <-              A2              <-
+  File B          <-              <-              B1              B2
+  File C          C1              C2              <-              C3
+* Most operation only need local files in order to work. Git is useful if you're
+  offline.
+* Everything in Git is checksummed before being stored. It's therefore
+  impossible to change the contents of any file or directory without Git knowing
+  about it. You can't lose information in transit or get file corruption without
+  Git detecting it. Git uses SHA-1 hash. Git stores this 40-character string
+  value of each file's contents instead of file names.
+* Git only adds data. This is good for data recovery.
+* Git has 3 main stages - modified, staged and committed.
+  - Modified: you have changed the file but not committed to the database. When
+    you checkout a project, the files are pulled out of the compressed dabase in
+    the Git directory and placed on disk. If a file has been modified but isn't
+    in the Staging Area, it's said to be 'modified'.
+  - Staged: marked a modified file to go into your next commit snapshots. This
+    is a file in your Git directory that stored information about what will go
+    into your next commit. This is technically called an index. A modified file
+    in the Staging area is said to be 'staged'.
+  - Committed: data is stored in your local database. This is where git stores
+    the metadata and object database for your project. This is what is copied
+    when you clone a repository from another.
+* There are three main sections of a Git project: Working tree, staging area and
+  Git directory
+  Working Directory                Staging area                Git Directory
+         <-----------------------------------------------------------
+                            Checking out a project
+
+          ------------------------------>
+                   Stage Fixes
+
+                                         --------------------------->
+                                                    Commit
+* We use Git add to start tracking files using Git
+* The Git directory or repository is a hidden folder named .git in the root
+  directory of your project. Such a repository can be created in two ways:
+  - Cloning an existing repository from a remote server
+  - Initialising a new repository
+* You can use 'status' command to check which files have been modified
+* In Git, origin is the placeholder name for the URL of the remote repository.
+  Git sets up the origin by default when it clones a rempte repository. You can
+  use Origin to access the remote repository without having to enter a full URL.
+  You can also have multiple remotes for a repository by giving each a unique
+  name.
+* In Git, master is the branch of the remote repository you want to push your
+  changes to.
