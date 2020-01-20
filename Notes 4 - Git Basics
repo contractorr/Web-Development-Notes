@@ -45,7 +45,9 @@
 * We use Git add to start tracking files using Git
 * The Git directory or repository is a hidden folder named .git in the root
   directory of your project. Such a repository can be created in two ways:
-  - Cloning an existing repository from a remote server
+  - Cloning an existing repository from a remote server. Just open up where you
+    want the repository stored and hit the git clone command followed by the
+    repository URL
   - Initialising a new repository
 * You can use 'status' command to check which files have been modified
 * In Git, origin is the placeholder name for the URL of the remote repository.
@@ -55,3 +57,34 @@
   name.
 * In Git, master is the branch of the remote repository you want to push your
   changes to.
+* In each project you'll have files you don't want to version control. Ignore
+  rules for different projects is stored in github.com/github/gitignore. The
+  list of files to ignore is kept in a ".gitignore" file in the root folder. You
+  should define this before the first commit.
+  - Simply add a .gitignore file and include any files you'd like ignored.
+  - Adding a file name will ignore any files with this name, no matter where
+    they're located.
+  - If you only want to ignore one such file, it must not be in your root
+    directory and you must add the path from the root directory to this file.
+  - You can ignore all files with a particular extension - e.g. *.txt.
+  - You can ignore all files in a certain folder using /path/to/folder/*
+
+* You should commit often, and when making a commit:
+  - only include changes that belong together
+  - Begin your commit message with a short summary of the changes. If your
+    change is substantial, leave out the -m parameter. Such changes should be
+    followed by a body (separated by a blank line) which should tell you why you
+    made the changes and more detail on what you changed.
+  - Only commit work that is fully done and tested. Otherwise use 'Stash'
+    feature.
+* Git log
+  - lists the commits in chronological order, beginning with the newest
+    item. If there are more items than it can display on one page, the command
+    line indicates this by showing a colon (":") at the end of the page. You can
+    then go to the next page with the SPACE key and quit with the "q" key.
+  - each commit is identified by its 'commit hash'. With centralised VCS you can
+    use an ascending integer. In git, since everyone can work in parallel and
+    offline, you can't number your commits. You can refer to your commit using
+    just the first 7 characters, since this should be enough to make it unique.
+  - use the -p flag to display more information, including a diff
+* Use git remote -v to display the URL of your remote repository (origin)
