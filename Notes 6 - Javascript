@@ -1,0 +1,76 @@
+JavaScript
+* Invented by Brendan Eich, co-founder of Mozilla
+* Developers have written tools to unlock extra functionality, including:
+  * Browser Application Programming interfaces (APIs) - APIs built into web
+    browsers providing functionality like dynamically creating HTML and setting
+    CSS styles, collecting and manipulating a video stream from a user's webcam,
+    etc.
+  * Third-party APIs - allow developers to incorporate functionality in their
+    sites from other content providers, such as Twitter or Facebook.
+  * Third-party frameworks and libraries.
+* To incorporate JavaScript into your page, add a main.js file in your scripts
+  folder and add the following line to your index.html body:
+  <script src="scripts/main.js"></script>
+  This should be added after any HTML the JavaScript is supposed to affect. This
+  is because the HTML is loaded by the browser in the order it appears in the
+  file. It is usually the best strategy to put this just before the </body> tag.
+* The let or var keywords can be used to declare a variable:
+  let myVariable;
+  myVariable = 'Bob'; // this is a comment
+  let myNewVariable =  10; /* this is also a comment */
+  let anotherVariable = [1, 'Steve', true, 11];
+  let myVariable = document.querySelector('h1');
+  In JavaScript, variables are case sensitive.
+* === is the equality operator
+* !== is not equal
+* function multiply (num1,num2) {
+    let result = num1*num2
+    return result
+  }
+* if (a == b) {
+  alert('a equals b')
+  }else{
+  //do something else
+  }
+* document.querySelector('html').onclick = function() {
+    alert('Click');
+  }
+  Here we've selected the <html> element and set its onclick handler property
+  equal to an anynymous function which outputs Click.
+* Let's make it so that if you click on a pic, it changes:
+  let myImage = document.querySelector('img');
+  myImage.onclick = function() {
+      let mySrc = myImage.getAttribute('src');
+      if(mySrc === 'images/pic-1.png') {
+        myImage.setAttribute ('src','images/pic-2.png');
+      } else {
+        myImage.setAttribute ('src','images/pic-1.png');
+      }
+  }
+* Let's say we want to add a button, which when clicked, resets the heading
+  * we'd add the following to the index.html file:
+    <button>Change user</button>
+  * in the main.js script, we'd add the following:
+    let myButton = document.querySelector('button');
+    let myHeading = document.querySelector('h1');
+  * Now we add a function that asks the user for their name and stores it in a
+    variable with the help of the setItem function within an API called
+    localStorage:
+    function setUserName() {
+      let myName = prompt('Please enter your name.');
+      if(!myName || myName === null) {
+        setUserName();
+      } else {
+        localStorage.setItem('name', myName);
+        myHeading.innerHTML = 'Welcome, ' + myName;
+      }
+    }
+    if(!localStorage.getItem('name')) {
+      setUserName();
+    } else {
+      let storedName = localStorage.getItem('name');
+      myHeading.textContent = 'Welcome, ' + storedName;
+    }
+    myButton.onclick = function() {
+      setUserName();
+    }

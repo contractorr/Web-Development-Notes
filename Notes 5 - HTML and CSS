@@ -1,0 +1,392 @@
+Files
+* The files your website needs should be kept in a single folder that mirrors
+  the published website's file structure on the server.
+* Many computers and servers are case sensitive, so be careful when naming
+  files. It is generally best to use lower case and use dashes instead of
+  spaces. Servers might replace a space with %20, which is the character code
+  for spaces. The google search engine treats a dash as a word separator, but
+  does not regard an underscore that way.
+* Usually you'll have at least the following folders:
+  * index.html - containing you homepage content including text and images
+  * images filder - containing all your images
+  * styles folder - containing all your CSS code
+  * scripts folder - containing all the JavaScript code
+* You need to provide a path between files in your index.html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>My test page</title>
+    </head>
+    <body>
+      <img src="images/your-image-filename" width = "100" height = "100"
+      alt="My test image"> <!-- The width and height attributes are necessary
+                                because if they are excluded, the browser will
+                                calculate the size as the image loads, instead
+                                of when the page loads, causing the layout of
+                                the document may jump around.-->
+      <p>This is an ordered list</p>
+      <ol>
+        <li>item 1</li>
+        <li>item 2</li>
+      </ol>
+      <p>This is an unordered list</p>
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+      </ul>
+      <p>This is a link. a = anchor, href = hypertest reference.</p>
+      <a href="https://www.mozilla.org/en-UK/about/">Mozilla About Page</a>
+      <!-- Below we have a 2 x 2 table -->
+      <table>
+          <tr>
+              <td>Row 1, cell 1</td>
+              <td>Row 1, cell 2</td>
+          </tr>
+          <tr>
+              <td>Row 2, cell 1</td>
+              <td>Row 2, cell 2</td>
+          </tr>
+      </table>
+    </body>
+  </html>
+* Windows uses backslashes but this desn't make any difference - continue using
+  forwardslashes in html. The path navigation commands are the same as in unix.
+Hypertext Markup Language (HTML)
+* Stuff under the heading should go in the <main></main> element
+* A HTML element consists of an opening tag, the content and a closing tag. The
+  type of element is specified in the opening/closing tags.
+* Elements can have attributes. Attributes consist of a name followed by a value
+  in quotation marks:
+  <p class="editor-note">My cat is very grumpy</p>
+  You can omit the quotation marks for simple attributes without whitespace or
+  ASCII characters.
+* If you don't have any content then you don't need a closing tag
+  <img src="http://www.htmldog.com/badge1.gif" alt="My test image">
+  Here the alt attribute contains descriptive text for users who cannot see the
+  image, which can happen if the user is visually imparied or something has gone
+  wrong with your web page.
+  * JPEGs should be used for photographs. They will distort the image due to
+    compression.
+  * GIFs are limited to 256 colours. They allow pixels to be transparent. Fewer
+    colours = smaller file size. The colour of the original image is preserved.
+    Should be used for for images with solid colours, such as icons or logos.
+  * PNG replicaes colours like a GIF but allows 16m colours as well as alpha
+    transparency (50% transparency for an area). These should be used for
+    versatile images.
+  * The smaller the file size of your pictures, the quicker your page will load.
+* The <html></html> element is known as the root element
+* The <head></head> element contains stuff you're not going to show to viewers.
+  E.g. page description and keywords for search results, CSS, etc.
+* The <meta charset="utf-8"> element sets the character set to UTF-8.
+* The <title></title> element is what appears in your browser tab. It is also
+  used in bookmarks/favourites. All HTML pages should have a title.
+* HTML can contain 6 heading levels, <h1>-<h6>. Usually there is only one <h1>,
+  which is the title of the page.
+* The https:// or http:// part is called the protocol and must be included.
+* The href/src link can be absolute, can link to another HTML file in the same
+  directory/ image file in the image directory or send the user to another part
+  of the same page. E.g. you can use the id attribute:
+  <h2 id="test">Bring them here</h2>
+  <a href="#test">Go to test heading</a>
+  * Use href="#" as a placeholder if you don't want the link to go anywhere
+  * target="_blank" after the href attribute will cause the link to open in a
+    new tab
+* We use forms to collect data input by a user. They're used in conjunction with
+  a programming language, which will process the input.
+* There are 4 basic tags used in the actual HTML of forms:
+  * form defines the form:
+    * <form action="processingscript.php" method ="post">...</form>
+    * An action attribute will be needed to tell the form where it's contents
+      will be sent.
+    * A method attribute tells the form how the data will be sent. The default
+      for this attribute is "get" (latches info to a web address) or "post"
+      (sends the information)
+  * the input tag has 5 main type attributes:
+    * type="text". This is the default. A standard textbox. If a value attribute
+      is also specified, you can set the initial text in the box. If a
+      phaceholder attribut is specified, this will be in the input box.
+    * type="passowrd". Same as text type except user's input will be hidden
+    * type="checkbox". This can have a checked attribute
+      <input type="checkbox" checked>
+    * type="radio". Like a checkbox but only one button can be selected. Can
+      also have a checked attribute.
+      * Should be nested within a label element.
+      * All related radio buttons should have the same name attribute. This will
+        create a group and selecting one radio button will automatically
+        deselect others.
+      * It is best practice to include a for attribute that matches the ID on
+        the child input element so that assistive technologies can create links
+        between the parent and child.
+      * Inputs of type radio and checkbox report their name and value attribute
+        when submitted. In the below case the form data will be: indoor-outdoor=indoor
+        <label for="indoor">
+          <input id="indoor" value="indoor" type="radio" name="indoor-outdoor">Indoor
+        </label>
+    * type="submit". This is a button that will submit the form. It has a value
+      attribute that will be displayed on the button
+      <input type="submit" value"Submit">
+    * this usually goes inside a form:
+      <form action="/submit-cat-photo">
+        <input type="text" placeholder="cat photo URL" required>
+        <button type="submit">submit</button>
+      </form
+  * <textarea rows="5" cols="20">initial value of textarea</textarea>
+  * <select>
+        <option>A</option>
+        <option selected>B</option>
+        <option value="third option">C</option>
+    </select>
+    This is a dropdown. In this case B will be default selected. When the form
+    is submitted the value of the selected option will be sent unless a value
+    attribute is specified (A,B,third option).
+* In HTML, span (in-line) and div (block-line) are meaningless tags used in
+  conjunction with CSS to group chunks of code:
+  <div id="scissors">
+    <p>This is <span class="paper">crazy</span></p>
+  </div>
+* The form, input, textarea and select tags need to have a name attribute.
+  <form action="contactus.php" method="post">
+    <p>Name:</p>
+    <p><input type="text" name="name" value="Your name"></p>
+    <p>Species:</p>
+    <p><input name="species"></p>
+    <!-- remember: 'type="text"' isn't actually necessary -->
+    <p>Comments: </p>
+    <p><textarea name="comments" rows="5" cols="20">Your comments</textarea></p>
+    <p>Are you:</p>
+    <p><input type="radio" name="areyou" value="male"> Male</p>
+    <p><input type="radio" name="areyou" value="female"> Female</p>
+    <p><input type="radio" name="areyou" value="hermaphrodite"> An hermaphrodite</p>
+    <p><input type="radio" name="areyou" value="asexual"> Asexual</p>
+    <p><input type="submit"></p>
+  </form>
+Cascading Style Sheets (CSS)
+* There are three main ways to apply CSS styling.
+  * You can apply inline styles directly to HTML elements with the style
+    attribute.
+  * You can place CSS rules within style tags in an HTML document.
+  * You can write CSS rules in an external style sheet, then reference that file
+    in the HTML document.
+* This is a style sheet language. This means you can apply styles selectively to
+  elements in HTML documents.
+* You can apply CSS to HTML in three ways:
+  * Inline - to be avoided: <p style="color: red">text</p>
+  * Internal/Embedded styles are used for the whole page and found inside the
+    head element. Also to be avoided:
+    <style>
+        p {
+            color: red;
+        }
+    </style>
+  * External - this stuff goes in the style.css file in the styles folder. The
+    head elements in the index.html file will need to be updated with the
+    following:
+    <link href="styles/style.css" ref="stylesheet">
+    To turn all the paragraphs, lists and headings on a HTML page red, add the
+    following to your style.css file:
+    p, li, h1 {
+      font-family: arial, helvetica, sans-sherif;
+      font-size: 14p;
+      color:red;
+      width: 500px; /* px means pixels */
+      border: 1px solid black;
+    }
+* IN CSS instead of elements you have rule sets. These consist of a selector and
+  declaration.
+  * The selector specifies the element(s) you'd like to style
+  * The declaration contains a single rule, specifying which of the element's
+    properties you want to style (property), as well as how you'd like to style
+    it (property value). These go inside curly brackets.
+* The selector can select more than just element types. Here are the most common
+  selector types:
+  * You can define your own selectors using class and ID selectors. This allows
+    the same element to be presented differently depending on it's class or ID.
+    * Class selector selects elements of the specified class. E.g.
+      <style>.blue-text {color: blue;}</style>
+      <p class="blue-text">. Class is used to identify multiple elements.
+    * ID selector selects he element on the page with the specified ID. E.g.
+      #my-id {} selects <p id="my-id"> and <a id="my-id">ID. ID is used to
+      identify one element.
+    * You can apply a selector to a specific element by stating the HTML
+      selector. For example, to apply a style to paragraphs of class jam, use
+      p.jam {}.
+  * You can apply the same properties to multiple selectors.
+    * You can group your classes E.g.
+      h2, .Class_1, Class_2 { color: red; }
+    * You can nest your classes
+      #top    {background-color: #ccc;
+               padding: 1em;}
+      #top h1 {color: #ff0;}
+      #top p  {color: red;}
+               font-weight: bold;}
+  * Attribute selector selects elements with the specified attribute. E.g.
+    [img='src'] {} selects <img src="myimage.png"> but not <img>
+    [type=radio'] {margin: 1px 2px 1px 2px } will select radio buttons
+  * Pseudo-class selector selects the specified elements only when in the
+    specified state (e.g. being hovered over). E.g. a:hover selects <a> but only
+    when the mouse pointer is hovering over the link.
+    a:link{color: blue;}
+    a:visited{color: purple;}
+  * an element can inherit from multiple classes, e.g. <p class="red-text blue
+    background">
+  * When conflicts arise, inline styles override ids which override classes
+    <p style="color:red" id="blue-text" class="green-text"
+    Here the text will be red, then blue then green. If we prefer green to take
+    precedence, we'd specify .green-text {color: green !important;}
+* Lengths can be measured in px (pixels), em (unit for the calculated size of a
+  font - e.g. 2em = 2*current font size), pt (unit for points, typically
+  measured in printed media), % (unit for percentages).
+* Colours can be specified by predefined names, three RGB values ranging from 0
+  - 255 or by heladecimal which can be compressed (e.g.c96) which tells you RGB
+  values, or uncompressed (#cc9966) which gives you more control.
+* The font specified needs to be on the user's computer. It's safest to use
+  Arial, Verdana and times new roman. You can specify multiple fonts, so the
+  browser will go through until it finds a font it can use.
+  * font-weight: bold /* can have bolder, lighter, 100, 200, 300, 400 (normal),
+                         500, 600, 700 (same as bold), 800 or 900 */
+  * font-style: italic
+  * text-decoration: underline /* can also have overline or line-through.
+                                  Underlines should only be used for links. */
+  * text-transform: uppercase; /* can also have capitalize (changes first letter
+                                  of every word to uppercase), lowercase. */
+  * font-variant: small-caps
+* You can also specify spacing
+  * letter-spacing
+  * word-spacing
+  * line-height: 2; /* this will be 2*font size */
+  * text-align: center; /*left, right, center or justify */
+  * text-indent: 2; /* not really used /*
+* You can add a link to your index.html file your page downloads a font family
+  when it loads. This enables you to set it on your HTML elements. E.g.
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"
+  type="text/css">
+  Then in your .css file
+  html {
+    font-size: 10px;
+    font-family: "Open Sans", sans-serif;
+    background-color: #00539F;
+  }
+  h1 {
+    font-size: 60px;
+    text-align: center;
+    margin: 0; /* gets rid of the default styling applied on the <h1> element */
+    padding: 20px 0;
+    color: #00539F;
+    text-shadow: 3px 3px 1px black; /* horizontal offset, vertical offset, blur
+                                       radius, base colour */
+  }
+  p, li {
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 1px;
+  }
+  body {
+    width: 600px;
+    margin: 0 auto; /* If only two values provided then the first value affects
+                       the top and bottom, while the second affects the left and
+                       right. Auto divides the available space equally */
+    background-color: #FF9500;
+    padding: 0 20px 20px 20px; /* If four values provided then the first value
+                                  affects the top, then right, bottom and left,
+                                  in that order */
+    border: 5px solid black;
+  }
+  img {
+    display: block; /* unlike the body element, which is block level, the img
+                      element is inline, which means it cant have spacing values
+                      such as margin. We include this command to apply margins
+                      to the image. */
+    margin: 0 auto;
+  }
+* You can adjust the size of margins and padding. Use margin, or margin-top/
+  bottom/left/right and padding, or padding-top,bottom,left,bottom.
+* CSS layout is based principally on the box model. Most of the HTML elements on
+  a page can be thought of as boxes stacked on top of one another. Each box has
+  * Margin
+    * Border
+      * Padding (the space immediately surrounding your content - the 'color',
+        'text-shadow' and 'background-color' properties refer to this)
+        * Element box
+  This box model can be applied to every element on the page.
+* Borders aren't set by default. If you want one, use border-style (solid,
+  dotted, dashed, double, groove, ridge, inset and outset). You can also adjust
+  the border-width using pixels. As with margins and padding, you can specify
+  border-top/botton/right/left-width. Border-color sets the colour.
+
+JavaScript
+* Invented by Brendan Eich, co-founder of Mozilla
+* Developers have written tools to unlock extra functionality, including:
+  * Browser Application Programming interfaces (APIs) - APIs built into web
+    browsers providing functionality like dynamically creating HTML and setting
+    CSS styles, collecting and manipulating a video stream from a user's webcam,
+    etc.
+  * Third-party APIs - allow developers to incorporate functionality in their
+    sites from other content providers, such as Twitter or Facebook.
+  * Third-party frameworks and libraries.
+* To incorporate JavaScript into your page, add a main.js file in your scripts
+  folder and add the following line to your index.html body:
+  <script src="scripts/main.js"></script>
+  This should be added after any HTML the JavaScript is supposed to affect. This
+  is because the HTML is loaded by the browser in the order it appears in the
+  file. It is usually the best strategy to put this just before the </body> tag.
+* The let or var keywords can be used to declare a variable:
+  let myVariable;
+  myVariable = 'Bob'; // this is a comment
+  let myNewVariable =  10; /* this is also a comment */
+  let anotherVariable = [1, 'Steve', true, 11];
+  let myVariable = document.querySelector('h1');
+  In JavaScript, variables are case sensitive.
+* === is the equality operator
+* !== is not equal
+* function multiply (num1,num2) {
+    let result = num1*num2
+    return result
+  }
+* if (a == b) {
+  alert('a equals b')
+  }else{
+  //do something else
+  }
+* document.querySelector('html').onclick = function() {
+    alert('Click');
+  }
+  Here we've selected the <html> element and set its onclick handler property
+  equal to an anynymous function which outputs Click.
+* Let's make it so that if you click on a pic, it changes:
+  let myImage = document.querySelector('img');
+  myImage.onclick = function() {
+      let mySrc = myImage.getAttribute('src');
+      if(mySrc === 'images/pic-1.png') {
+        myImage.setAttribute ('src','images/pic-2.png');
+      } else {
+        myImage.setAttribute ('src','images/pic-1.png');
+      }
+  }
+* Let's say we want to add a button, which when clicked, resets the heading
+  * we'd add the following to the index.html file:
+    <button>Change user</button>
+  * in the main.js script, we'd add the following:
+    let myButton = document.querySelector('button');
+    let myHeading = document.querySelector('h1');
+  * Now we add a function that asks the user for their name and stores it in a
+    variable with the help of the setItem function within an API called
+    localStorage:
+    function setUserName() {
+      let myName = prompt('Please enter your name.');
+      if(!myName || myName === null) {
+        setUserName();
+      } else {
+        localStorage.setItem('name', myName);
+        myHeading.innerHTML = 'Welcome, ' + myName;
+      }
+    }
+    if(!localStorage.getItem('name')) {
+      setUserName();
+    } else {
+      let storedName = localStorage.getItem('name');
+      myHeading.textContent = 'Welcome, ' + storedName;
+    }
+    myButton.onclick = function() {
+      setUserName();
+    }
