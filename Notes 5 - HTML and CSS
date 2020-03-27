@@ -240,6 +240,8 @@ Cascading Style Sheets (CSS)
 * Colours can be specified by predefined names, three RGB values ranging from 0
   - 255 or by heladecimal which can be compressed (e.g.c96) which tells you RGB
   values, or uncompressed (#cc9966) which gives you more control.
+  * Use rgba if you want your element to be transparent. The value of a can vary
+    from 0 to 1.
 * The font specified needs to be on the user's computer. It's safest to use
   Arial, Verdana and times new roman. You can specify multiple fonts, so the
   browser will go through until it finds a font it can use.
@@ -254,7 +256,8 @@ Cascading Style Sheets (CSS)
 * You can also specify spacing
   * letter-spacing
   * word-spacing
-  * line-height: 2; /* this will be 2*font size */
+  * line-height: 2; /*This property determines how much vertical space each line
+                      gets. This will be 2*font size */
   * text-align: center; /*left, right, center or justify */
   * text-indent: 2; /* not really used /*
 * You can add a link to your index.html file your page downloads a font family
@@ -313,80 +316,131 @@ Cascading Style Sheets (CSS)
   dotted, dashed, double, groove, ridge, inset and outset). You can also adjust
   the border-width using pixels. As with margins and padding, you can specify
   border-top/botton/right/left-width. Border-color sets the colour.
-
-JavaScript
-* Invented by Brendan Eich, co-founder of Mozilla
-* Developers have written tools to unlock extra functionality, including:
-  * Browser Application Programming interfaces (APIs) - APIs built into web
-    browsers providing functionality like dynamically creating HTML and setting
-    CSS styles, collecting and manipulating a video stream from a user's webcam,
-    etc.
-  * Third-party APIs - allow developers to incorporate functionality in their
-    sites from other content providers, such as Twitter or Facebook.
-  * Third-party frameworks and libraries.
-* To incorporate JavaScript into your page, add a main.js file in your scripts
-  folder and add the following line to your index.html body:
-  <script src="scripts/main.js"></script>
-  This should be added after any HTML the JavaScript is supposed to affect. This
-  is because the HTML is loaded by the browser in the order it appears in the
-  file. It is usually the best strategy to put this just before the </body> tag.
-* The let or var keywords can be used to declare a variable:
-  let myVariable;
-  myVariable = 'Bob'; // this is a comment
-  let myNewVariable =  10; /* this is also a comment */
-  let anotherVariable = [1, 'Steve', true, 11];
-  let myVariable = document.querySelector('h1');
-  In JavaScript, variables are case sensitive.
-* === is the equality operator
-* !== is not equal
-* function multiply (num1,num2) {
-    let result = num1*num2
-    return result
-  }
-* if (a == b) {
-  alert('a equals b')
-  }else{
-  //do something else
-  }
-* document.querySelector('html').onclick = function() {
-    alert('Click');
-  }
-  Here we've selected the <html> element and set its onclick handler property
-  equal to an anynymous function which outputs Click.
-* Let's make it so that if you click on a pic, it changes:
-  let myImage = document.querySelector('img');
-  myImage.onclick = function() {
-      let mySrc = myImage.getAttribute('src');
-      if(mySrc === 'images/pic-1.png') {
-        myImage.setAttribute ('src','images/pic-2.png');
-      } else {
-        myImage.setAttribute ('src','images/pic-1.png');
-      }
-  }
-* Let's say we want to add a button, which when clicked, resets the heading
-  * we'd add the following to the index.html file:
-    <button>Change user</button>
-  * in the main.js script, we'd add the following:
-    let myButton = document.querySelector('button');
-    let myHeading = document.querySelector('h1');
-  * Now we add a function that asks the user for their name and stores it in a
-    variable with the help of the setItem function within an API called
-    localStorage:
-    function setUserName() {
-      let myName = prompt('Please enter your name.');
-      if(!myName || myName === null) {
-        setUserName();
-      } else {
-        localStorage.setItem('name', myName);
-        myHeading.innerHTML = 'Welcome, ' + myName;
-      }
-    }
-    if(!localStorage.getItem('name')) {
-      setUserName();
-    } else {
-      let storedName = localStorage.getItem('name');
-      myHeading.textContent = 'Welcome, ' + storedName;
-    }
-    myButton.onclick = function() {
-      setUserName();
-    }
+* You can specify a box-shadow property, which takes values for:
+  * offset-x
+  * offset-y
+  * blur-radius
+  * spread-radius
+  * colour
+* You can use the opaciy property to make stuff transparent.
+* CSS treats each HTML element as its own box, which is usually referred to as
+  the CSS Box Model. Block-level items automatically start on a new line (think
+  headings, paragraphs, and divs) while inline items sit within surrounding
+  content (like images or spans). The default layout of elements in this way is
+  called the normal flow of a document, but CSS offers the position property to
+  override it.
+  * When the position of an element is set to relative, it allows you to specify
+    how CSS should move it relative to its current position in the normal flow
+    of the page. It pairs with the CSS offset properties of left or right, and
+    top or bottom.
+  * When the position is set to absolute, the element is locked in place
+    relative to it's closest positioned ancestor. Unlike the relative position,
+    absolute removes the element from the normal flow of the document so
+    surrounding items ignore it.
+  * When the position is set to fixed, which is a type of absolute positioning,
+    the element is locked relative to the browser window. It stays in place as
+    the user scrolls.
+  * The next positioning tool does not actually use position, but sets the float
+    property of an element. Floating elements are removed from the normal flow
+    of a document and pushed to either the left or right of their containing
+    parent element. It's commonly used with the width property to specify how
+    much horizontal space the floated element requires.The next positioning tool
+    does not actually use position, but sets the float property of an element.
+    Floating elements are removed from the normal flow of a document and pushed
+    to either the left or right of their containing parent element. It's
+    commonly used with the width property to specify how much horizontal space
+    the floated element requires.
+    <head>
+      <style>
+        #left {
+          float: left;
+          width: 50%;
+        }
+        #right {
+          float: right;
+          width: 40%;
+        }
+        aside, section {
+          padding: 2px;
+          background-color: #ccc;
+        }
+      </style>
+    </head>
+    <body>
+      <header>
+        <h1>Welcome!</h1>
+      </header>
+      <section id="left">
+        <h2>Content</h2>
+        <p>Good stuff</p>
+      </section>
+      <aside id="right">
+        <h2>Sidebar</h2>
+        <p>Links</p>
+      </aside>
+    </body>
+  * When items overlap, use the z-index property. It takes integer values and
+    the element with the highest z-index value will be at the top.
+* hsl() /*hue (0-360deg), saturation (100% = grey), lightness (50% is normal,
+  0% is black, 100% is white). This is another way to specify a colour.
+* background: linear-gradient(45deg, colour1, colour2)
+* background: repeating-linear-gradient(90deg, yellow 0px, yellow 40px, black
+  40px, black 80px)
+* background: url(<some url>); /*set a patterned background based on an image*/
+* Compatability
+  * Media Queries. @media(max-height: 800px){/* some CSS rules if this is the
+    case */}
+  * max-width: 100%; height: auto; /* this will make sure your box is not wider
+    than the screen and adjust the height so that the aspect ratio is the same.
+  * Viewport units (vw,vh,vmin,vmax)
+  * Use 50% of actual size so it doesn't look ugly on high res displays
+* Accessibility
+  * Each page should have 1 h1. You shouldn't skip headings (e.g. h2 --> h5).
+  * Use main, header, footer, nav, article and section tags to add semantic
+    meaning to html
+  * Use <header> within the body tag. This is different to the head element. It
+    contains introductory information such as the h1 tag, navigation links or
+    anything that repeats at the top of every page. Wrap the navigation links in
+    the header with a <nav>. Copyright info and links to related documents goes
+    in the <footer>.
+  * The controls attribute turns on the browser default audio controls for audio
+    clips:
+    <audio id="meowClip" controls>
+      <source src="audio/meow.mp3" type="audio/mpeg" />
+      <source src="audio/meow.ogg" type="audio/ogg" />
+    </audio>
+  * To include a figure, add the following:
+    <figure>
+      <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+      <br>
+      <figcaption>
+        Master Camper Cat demonstrates proper form of a roundhouse kick.
+      </figcaption>
+    </figure>
+  * The label tag wraps the text for a specific form control item. The for
+    attribue on the label is used by screen readers and should the the same as
+    the id attribute for the input:
+    * For radio buttons you have multiple inputs, all of which are related. In
+      order to group them together, use the fieldset tag:
+    <section>
+      <form>
+        <p>Sign up to receive Camper Cat's blog posts by email here!</p>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email" >
+        <br><br>
+        <fieldset>
+          <legend>What level ninja are you?</legend>
+          <input id="newbie" type="radio" name="levels" value="newbie">
+          <label for="newbie">Newbie Kitten</label><br>
+          <input id="intermediate" type="radio" name="levels" value="intermediate">
+          <label for="intermediate">Developing Student</label><br>
+          <input id="master" type="radio" name="levels" value="master">
+          <label for="master">Master</label>
+        </fieldset>
+        <br>
+        <label for="DOB">Date of Birth:</label>
+        <input type="date" id="DOB" name="date">
+        <br><br>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+    </section>
