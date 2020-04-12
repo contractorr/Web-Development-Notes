@@ -444,3 +444,34 @@ Cascading Style Sheets (CSS)
         <input type="submit" name="submit" value="Submit">
       </form>
     </section>
+  * The <date> element and <datetime> attribute standardize datetime elements so
+    that assistive technologies can have access to an unambiguous format. E.g.
+    <p>This event happened on <time datetime="2013-02-13">Wednesday 13<sup>th</sup> Feb.</time></p>
+  * Some elements might (e.g. charts) might need alternative representations for
+    screen readers (e.g. table). Such elements would need to be visually hidden.
+    This can be accomplished using a CSS class:
+    .sr-only {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      top: auto;
+      overflow: hidden;
+    }
+  * The accesskey attribute allows you to specify a shortcut key to activate or
+    bring focus to an element. This can make navigation more efficient for
+    keyboard-only users. It's particularly useful when it's used with interactive
+    elements. This includes links, buttons, and form controls.
+    <button accesskey="b">Important Button</button>
+  * When a tag has the tabindex attribute, that element can be focused on. The
+    value (an integer that's positive, negative, or zero) determines the
+    behavior. Certain elements, such as links and form controls, automatically
+    receive keyboard focus when a user tabs through a page. This same
+    functionality can be given to other elements, such as div, span, and p, by
+    placing a tabindex="0" attribute on them. Here's an example:
+    <div tabindex="0">I need keyboard focus!</div>
+    Using tabindex also enables the CSS pseudo-class :focus to work on the <p>
+    tag. If you use a positive number, you can dictate the order of the keyboard
+    focus. Once the positive number items have been cycled through, the focus
+    will shift to default and tabindex="0" elements. Usually you'd want to stick
+    to the default top-to-bottom order set by the HTML. 
