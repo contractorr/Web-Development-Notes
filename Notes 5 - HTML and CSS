@@ -778,9 +778,3 @@ CSS Grid
   <div class="item3">content</div>
   <div class="item4">footer</div>
 </div>
-
-
-
-
-
-, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.

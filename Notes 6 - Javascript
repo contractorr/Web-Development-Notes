@@ -1,4 +1,5 @@
 JavaScript
+Introduction
 * Invented by Brendan Eich, co-founder of Mozilla
 * Developers have written tools to unlock extra functionality, including:
   * Browser Application Programming interfaces (APIs) - APIs built into web
@@ -14,13 +15,84 @@ JavaScript
   This should be added after any HTML the JavaScript is supposed to affect. This
   is because the HTML is loaded by the browser in the order it appears in the
   file. It is usually the best strategy to put this just before the </body> tag.
+Variables
 * The let or var keywords can be used to declare a variable:
-  let myVariable;
-  myVariable = 'Bob'; // this is a comment
-  let myNewVariable =  10; /* this is also a comment */
+  let myVariable; /* myVariable will be undefined. Doing a mathematical
+                     operation on this will result in a NaN. */
+  myVariable = 'Bob'; // You can also use ""
+  let myNewVariable =  10;
   let anotherVariable = [1, 'Steve', true, 11];
   let myVariable = document.querySelector('h1');
   In JavaScript, variables are case sensitive.
+* Unlike the var keyword, if you declare a variable using let, you will get an
+  error if that variable is overwritten.
+* Declaring a variable with var creates a global variable (or local if declared
+  in a function). This can cause problems:
+    var printNumTwo;
+    for (var i = 0; i < 3; i++) {
+      if (i === 2) {
+        printNumTwo = function() {
+          return i;
+        };
+      }
+    }
+    console.log(printNumTwo());
+    // returns 3
+  So to get around this, we use the let keyword:
+    'use strict';
+    let printNumTwo;
+    for (let i = 0; i < 3; i++) {
+      if (i === 2) {
+        printNumTwo = function() {
+          return i;
+        };
+      }
+    }
+    console.log(printNumTwo());
+    // returns 2
+    console.log(i);
+    // returns "i is not defined"
+  Here i is not defined globally so we can't reference it outside the loop.
+  Inside the loop, three different i variables are crated, with unique values 0,
+  1 and 2.
+    function checkScope() {
+      'use strict';
+      let i = 'function scope';
+      if (true) {
+        let i = 'block scope';
+        console.log('Block scope i is: ', i);
+      }
+      console.log('Function scope i is: ', i);
+      return i;
+    }
+    // Block scope i is:  block scope
+    // Function scope i is:  function scope
+* Mutability: It is common for developers to use uppercase variable identifiers
+  for 'immutable' values (e.g. FAV_PET) and lowercase or camelCase for mutable
+  values.
+  * The keyword const is used to declare variables whose identifier can't be
+    reassigned. Although const variables are regarded as 'immutable', they're not:
+      "use strict";
+      const s = [5, 6, 7];
+      s = [1, 2, 3]; // throws error, trying to assign a const
+      s[2] = 45; // works just as it would with an array declared with var or let
+      console.log(s); // returns [5, 6, 45]
+  * If you actually want your data to be immutable, use Object.freeze.  
+      let obj = {
+        name:"FreeCodeCamp",
+        review:"Awesome"
+      };
+      Object.freeze(obj);
+      obj.review = "bad"; // will be ignored. Mutation not allowed
+      obj.newProp = "Test"; // will be ignored. Mutation not allowed
+      console.log(obj);
+      // { name: "FreeCodeCamp", review:"Awesome"}
+* When JavaScript variables are declared, they have an initial value of
+  undefined. If you do a mathematical operation on an undefined variable your
+  result will be NaN which means "Not a Number". If you concatenate a string
+  with an undefined variable, you will get a literal string of "undefined".
+Arithmetic
+* if a = 1, then a += 5; will turn a into 6.
 * === is the equality operator
 * !== is not equal
 * function multiply (num1,num2) {
@@ -32,11 +104,57 @@ JavaScript
   }else{
   //do something else
   }
+* JavaScript has a Math.random() function that generates a random decimal number
+  between 0 (inclusive) and not quite up to 1 (exclusive).
+* Math.floor() rounds down to the nearest whole number.
+  * Math.floor(Math.random() * 20); // will generate a number between 1 - 19
+* The parseInt() function parses a string and returns an integer. It takes a
+  second argument for the radix, which specifies the base of the number in the
+  string. The radix can be an integer between 2 and 36.
+  * var a = parseInt("11", 2); //33
+ String Operations
+* 'My name is Raj' + ' Contractor.'; //This is concatenation
+* var myStr = 'My name is Raj';
+  myStr += ' Contractor.';
+* var myName = 'Raj ';
+  var secondName = 'Contractor';
+  myName += secondName;
+* secondName.length // Will return 10
+* secondName[0] //will return C
+* secondName[secondName.length - 1] // will return the last character
+* Unlike arrays, strings are immutable, meaning you can't change the individual
+  characters of a string literal. secondName[0] = D; will not do anything. You
+  would have to reassign a new string to secondName.
+Array Operations
+* .pop() /* will remove and return the last element. You can assign this to a
+            variable */
+* .push(10) // adds an 10 to the end of your array
+* .shift() /* will remove and return the first element. You can assign this to a
+            variable */
+* .unshift(10) // adds 10 to the front of your array
+Escape characters
+\' single quote
+\" double quote
+\\ backslash
+\n newline
+\r carriage return
+\t tab
+\b word boundary
+\f form feed
+Functions
+* function myFunction(param1,param2) {
+  console.log(param1,param2);
+  }
+* if you don't use var, your variable will be global even if declared in the
+  function.
+* two variables can share the same name if one is global and the other local
 * document.querySelector('html').onclick = function() {
     alert('Click');
   }
-  Here we've selected the <html> element and set its onclick handler property
-  equal to an anynymous function which outputs Click.
+* Functions don't have to have a return statement. Without one, the returned
+  value will be 'undefined'
+Here we've selected the <html> element and set its onclick handler property
+equal to an anynymous function which outputs Click.
 * Let's make it so that if you click on a pic, it changes:
   let myImage = document.querySelector('img');
   myImage.onclick = function() {
@@ -47,6 +165,121 @@ JavaScript
         myImage.setAttribute ('src','images/pic-1.png');
       }
   }
+* && = AND operator
+* || = OR operator
+* switch (num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+    statement2;
+    break;
+...
+  default:
+    defaultStatement;
+    break;
+} // the default statement is executed if num doesn't match any case statements
+* function isEquals(a,b) {
+  return a === b;
+} // avoid if-else statements where possible
+The Conditional (Ternary) Operator:
+* condition ? statement-if-true : statement-if-false;
+* E.g.
+    function findGreaterOrEqual(a, b) {
+      return (a === b) ? "a and b are equal"
+        : (a > b) ? "a is greater"
+        : "b is greater";
+    }
+* You should only use once, instead of chaining them together as above
+Objects
+* JavaScript Objects store properties in a key-value format.
+* Defining objects:
+    var anotherObject = {
+      make: "Ford",
+      5: "five",
+      "model": "focus"
+    }; /* you can omit quotes for single-word properties. Any non-string
+       properties are automatically typecast as strings.*/
+* You can access object properties via the dot or bracket notation. You have to
+  use brackets if the property name is multiple words.
+* You would add/update properties in the same way. If the property already
+  exists, it'll be updated. Else it'll be added:
+  * anotherObject.make = "Nissan";
+  * anotherObject["name"] = "Nissan";
+  * var temp = "name";
+    anotherObject[temp] = "Nissan";
+* Properties can be removed using: delete anotherObject.name;
+* Objects can be used to replace if-else and switch statements:
+    var alpha = {
+      1:"Z",
+      2:"Y",
+      3:"X",
+      4:"W",
+    };
+    alpha[2]; // "Y"
+* use .hasOwnProperty(propname) to check if an object has that property
+* A JavaScript object is an example of a flexible data structure because it
+  allows for an arbitrary combination of strings, numbers, booleans, arrays,
+  functions and objects.
+    var ourMusic = [
+      {
+        "artist": "Daft Punk",
+        "title": "Homework",
+        "release_year": 1997,
+        "formats": [
+          "CD",
+          "Cassette",
+          "LP"
+        ],
+        "gold": true
+      }
+    ];
+  This is an array with one object inside. The object has a nested "formats"
+  array.
+* Javascript Object Notation (JSON) is a related data interchange format used to
+  store data.
+* You can chaing together dot or bracket notation to access nested Objects, e.g.
+  ourStorage.desk.drawer;
+Loops
+* While notation:
+    var ourArray = [];
+    var i = 0;
+    while(i < 5) {
+    ourArray.push(i);
+    i++;
+    }
+* For notation:
+    var ourArray = [];
+    for (var i = 0; i < 5; i++) {
+    ourArray.push(i);
+    }
+  * You can replace ++ with += or -= to iterate by whatever you want
+* Do-while notation:
+    var ourArray = [];
+    var i = 0;
+    do {
+      ourArray.push(i);
+      i++;
+    } while (i < 5);
+    * use this if you want the code to be executed at least once
+Resursion
+* You can replace for loops with recursion:
+  * For loop:
+      function multiply(arr, n) {
+        var product = 1;
+        for (var i = 0; i < n; i++) {
+            product *= arr[i];
+        }
+        return product;
+      }
+  * Equivalent recursive function:
+      function multiply(arr, n) {
+        if (n <= 0) {
+          return 1;
+        } else {
+          return multiply(arr, n - 1) * arr[n - 1];
+        }
+      }
 * Let's say we want to add a button, which when clicked, resets the heading
   * we'd add the following to the index.html file:
     <button>Change user</button>
