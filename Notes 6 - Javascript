@@ -77,7 +77,7 @@ Variables
       s = [1, 2, 3]; // throws error, trying to assign a const
       s[2] = 45; // works just as it would with an array declared with var or let
       console.log(s); // returns [5, 6, 45]
-  * If you actually want your data to be immutable, use Object.freeze.  
+  * If you actually want your data to be immutable, use Object.freeze.
       let obj = {
         name:"FreeCodeCamp",
         review:"Awesome"
@@ -153,6 +153,36 @@ Functions
   }
 * Functions don't have to have a return statement. Without one, the returned
   value will be 'undefined'
+* We don't have to name functions if they won't be reused:
+    const myFunc = function() {
+      const myVar = "value";
+      return myVar;
+    }
+  or
+    const myFunc = () => {
+      const myVar = "value";
+      return myVar;
+    }
+  * If there is no body and only a return value, we can just write:
+      const myFunc = () => "value";
+  * If there is only one argument or line of code, you can omit the parentheses /
+    curly brackets:
+      const doubler = item => item * 2;
+  * You can have a default parameter:
+      const greeting = (name = "Anonymous") => "Hello, " + name;
+* You can have a variable number of arguments into a function using the rest
+  parameter
+    function howMany(...args) {
+      return "You have passed " + args.length + " arguments.";
+    }
+* you can unpack an array using the spread operator:
+    var arr = [6, 89, 3, 45];
+    var maximus = Math.max.apply(null, arr); // returns 89
+  The Math.max() function expects comma-separated arguments, which is why we
+  have to use apply. Instead, we could have just used the spread operator:
+    var maximus = Math.max(..arr);
+  You can copy all contents of one array to another using the spread operator:
+    arr2 = [...arr1];
 Here we've selected the <html> element and set its onclick handler property
 equal to an anynymous function which outputs Click.
 * Let's make it so that if you click on a pic, it changes:
@@ -240,6 +270,127 @@ Objects
   store data.
 * You can chaing together dot or bracket notation to access nested Objects, e.g.
   ourStorage.desk.drawer;
+  * You can define object literals in two ways:
+    * The ES5 way:
+      const createPerson = (name, age, gender) => {
+        "use strict";
+        return {
+          name: name,
+          age: age,
+          gender: gender
+        };
+      };
+    * The ES6 way:
+      const createPerson = (name, age, gender) => {
+        "use strict";
+        return ({name,age,gender});
+      };
+      // in both of the above cases, createPerson("Zodiac Hasbro", 56, "male")
+      // will return {name: "Zodiac Hasbro", age: 56, gender: "male"}.
+  * You can define functions inside objects in two ways:
+    * The ES5 way:
+      const person = {
+        name: "Taylor",
+        sayHello: function() {
+          return `Hello! My name is ${this.name}.`;
+        }
+      };
+    * The ES6 way:
+      const person = {
+        name: "Taylor",
+        sayHello() {
+          return `Hello! My name is ${this.name}.`;
+        }
+      }
+* JavaScript doesn't have a fully-fledged class implementation of an object-
+  oriented paradigm. If we want to define our own class and initiate an object
+  of that class, there are two ways:
+  * The ES5 way:
+    var SpaceShuttle = function(targetPlanet){
+      this.targetPlanet = targetPlanet;
+    }
+    var zeus = new SpaceShuttle('Jupiter');
+  * The ES6 way:
+    class SpaceShuttle {
+      constructor(targetPlanet){
+        this.targetPlanet = targetPlanet;
+      }
+      // getter
+      get writer() {
+        return this._author;
+      }
+      // setter
+      set writer(updatedAuthor) {
+        this._author = updatedAuthor;
+      }
+    }
+    const zeus = new SpaceShuttle('Jupiter');
+    // The class keyword declares a new function, to which a constructor is
+    // added. This constructor is envoked when new is called to create a new
+    // object. UpperCamelCase should be used for class names. You can also
+    // define getter and setter functions as above. The syntax is not the same
+    // as a typical function. They hide the internal implementation details.
+    // Private variables should begin with an underscore.
+    const lol = new Book('anonymous');
+    console.log(lol.writer);  // anonymous
+    lol.writer = 'wut';
+    console.log(lol.writer);  // wut
+Destructuring Assignment:
+  * You can assign out values from an object using destructuring assignment:
+      const user = { name: 'John', age: 34};
+    If you wanted to assign new variables for this object's properties, instead
+    of:
+      const name = user.name; //name = 'John'
+      const age = user.age; //age = 34
+    You could use:
+      const { name, age} = user; //name = 'John', age = 34
+    Or:
+      const { name: userName, age: userAge } = user; // userName = 'John'...
+  * You can still use them if your object is nested:
+      const user = {
+        johnDoe: {
+          age: 34,
+          email: 'johnDoe@freeCodeCamp.com'
+        }
+      };
+      const { johnDoe: {age: userAge, email: userEmail}} = user;
+  * You can also destructure arrayrs:
+      // assign values from an array. a, b and c don't need to be declared.
+      const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+      console.log(a, b, c); // 1, 2, 5
+      // swap values assigned to existing variables
+      let a = 8, b = 6;
+      [a,b] = [b,a];
+      // while destructuring an array, store the rest of the array into a
+      // separate veriable
+      const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+      console.log(a, b); // 1, 2
+      console.log(arr); // [3, 4, 5, 7]
+  * You can destructure an object passed into a function:
+      const profileUpdate = (profileData) => {
+        const { name, age, nationality, location } = profileData;
+        // do something with these variables
+      }
+      // The above can be converted to:
+      const profileUpdate = ({ name, age, nationality, location }) => {
+        /* do something with these fields */
+      }
+      // This way only the relevant fields are copied inside the function
+Template Literals
+* These are special types of strings that are enclosed by backticks instead of '
+  or ". You don't need to insert \n for a newline, or concatenate using +:
+  const person = {
+    name: "Zodiac Hasbro",
+    age: 56
+  };
+
+  // Template literal with multi-line and string interpolation
+  const greeting = `Hello, my name is ${person.name}!
+  I am ${person.age} years old.`;
+
+  console.log(greeting); // prints
+  // Hello, my name is Zodiac Hasbro!
+  // I am 56 years old.
 Loops
 * While notation:
     var ourArray = [];
@@ -307,3 +458,73 @@ Resursion
     myButton.onclick = function() {
       setUserName();
     }
+Modularisation
+* You can export and import parts of a file in order to reuse that code in other
+  JavaScript files.
+* You need to create a script in the <body> tag of your HTML document. A script
+  of 'module' type can use import and export features:
+    <script type="module" src="filename.js"></script>
+  * There are two ways to export code:
+      export const add = (x, y) => {
+        return x + y;
+      }
+    Indirectly:
+     export { add, subtract };
+  * To import the code:
+      import { add, subtract } from './filename.js';
+      import * as myMathModule from "./math_functions.js";
+      // myMathModule is an object and you can access its functions:
+      myMathMoudle.add(2,3);
+  * If only one function is being exported, you can set it as default:
+      export default function add(x, y) {
+        return x + y;
+      }
+      import myAdd from "./math_functions.js";
+      // note no curly brackets around myAdd, and myAdd doesn't have to match
+      the name of the default export from math_functions.js.
+Promises
+* Used for asynchronous tasks. When the task completes, you either fulfill your
+  promise or don't. Promise is a constructor function. It takes a function as
+  an argument. The function, in turn, has two parameters - resolve and reject:
+    const makeServerRequest = new Promise((resolve,reject) => {
+      if(responseFromServer) {
+        resolve("We got the data");
+      } else {
+        reject("Data not received");
+      }
+    });
+    // A promise has three states: pending, fulfilled and rejected.
+  * It is useful when a process thakes an unknown amount of time (e.g. server
+    request).The then method is executed immediately after your promise is
+    fulfilled with resolve:
+      makeServerRequest.then(result => {
+        console.log(result);
+        }
+      );
+  * Similarly, the catch method is run immediately after a promise's reject
+    method is called:
+      makeServerRequest.catch(error => {
+        console.log(error);
+      });
+Regular Expressions
+* The .test(str) method takes a regular expression and applies it to str,
+  returning true or false depending on whether a match is found E.g.
+    let str = "The dog chased the cat";
+    let testRegEx = /chased/;
+    testRegEx.test(str); // returns true
+* You can use flags to adjust what you match:
+  * the i flag will ignore case - e.g. /chased/i;
+  * the gi will extract or search a pattern multiple times - e.g.
+      let repeatRegex = /Repeat/g;
+      let testStr = "Repeat, Repeat, Repeat";
+      testStr.match(repeatRegex); // Returns ["Repeat","Repeat","Repeat"]
+* While the .test() method is called on a regular expression, .match() is called
+  on a string and we pass in the regular expression. The .match() method
+  extracts the expression out of the string:
+    "Hello, World!".match(/Hello/);
+    // Returns ["Hello"]
+    let ourStr = "Regular expressions";
+    let ourRegex = /expressions/;
+    ourStr.match(ourRegex);
+    // Returns ["expressions"]
+  *
