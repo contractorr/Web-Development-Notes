@@ -1,0 +1,161 @@
+Shell
+* The shell is a program that takes commands and passes them to the operating
+  system.
+* Linux distributions supply a shell program from the GNU Project called bash.
+* When using a GUI, we need to use a terminal emulator to interact with the
+  shell (GNOME-terminal, KDE-konsole, etc.).
+* if the shell prompt ends in a hash, you are logged in as the Superuser. 
+Working Directory
+* pwd will treat symlinked paths as if they were actual paths.
+  E.g. /users/rcontrac/abc/def instead of /users/rcontrac/Dropbox/abc/def
+* If we want to see the physical path with the symlinks resolved, use pwd -P
+* Hidden files are prefixed on linux with a '.'. To see these use ls -a
+Manipulating Files and Directories
+* mkdir
+** -p a/b/c allows you to create nested directories a/b/c
+** -v verbose
+* cp source destination
+** cp a.txt b.txt will copy a.txt and create a new file b.txt
+** cp a.txt . will copy a.txt and add it to the current working directory
+** cp a.txt a/b/c will copy a.txt to a/b/c
+** cp a.txt b.txt c.txt a/b/c will copy the three files to a/b/c
+** cp *.txt will achieve the same result as above
+** cp -r ../test_files . will copy the folder test_files into the pwd
+** cp ../test_files/* . will copy the folder contents of test_files into the pwd
+** cp -r ../text_files/ . try to do both of the above (to be avoided)
+** supports verbose output -v
+** to copy directories use -r command
+** use -f force command to overcome restrictions
+** use -i command when copying many files to be warned if you're overwriting an
+   existing file
+* rm will delete files and directories
+* mv will move files and directories. It is a combination of cp and rm.
+* Open files in editor of your choice using for example atom
+  E.g. file\ 1.txt or atom "file 1.txt"
+* Select all contents of a directory at once using the . command.
+  E.g. atom ~/Documents/Python/Week\ 1/.
+Man Pages
+* These tell you more about a command. E.g. "man echo"will give you the manual
+  for the echo command
+* You can press spacebar to go the the next page of the manual, or scroll down
+  using the arrow keys.
+* Pull up the manual for man using "man man".
+Editing the Line
+* ^a takes you to the beginning of the line
+* ^e takes you to the end of the line
+* ^u clears and takes you to the beginning of the line
+Cleaning up
+* the clear command lears the terminal. ^l is the shortcut for this
+* close the terminal using exit or ^d
+* sleep 5 will make your terminal sleep for 5 seconds
+Redirecting and Appending
+* You can print to a file instead of the screen using the redirect operator >
+  E.g. echo "This is a test string" > testFile.txt
+* To add to an existing file, use the append operator >>
+  E.g. echo "This is a follow up sentence." >> testFile.txt
+* cat is short for "noncatenate". It can be be used to combine the contents of
+  multiple files. But another use for it is to just dump the contents of a file
+  onto the screen:
+  E.g. cat testFile.txt
+* cat File1.txt File2.txt will output the contents of both files. Cat can take
+  any number of arguments
+* cat File1.txt File2.txt > testFile.txt will output the contents of both files
+  to testFile.txt
+* Use diff File1 File2 to find the difference between the two files
+The List Command
+* ls will list files alphabetically
+** - l will list files alphabetically and give information on each one:
+*** File mode
+*** number of links
+*** owner name
+*** group name
+*** size in bytes
+*** date last modified
+*** pathname -> symlinks
+** -h will give us size of files in Kb and Mb (human readable)
+** -S will sort the results of ls by file size (biggest first)
+** -t will sort by last modified (recent first)
+** -r will reverse the results
+** -a will display hidden files. files beginning with a . are hidden.
+* ls *.txt will list all text files
+* ls x* will list all files begining with an 'x'
+* ls *test* will list all files with the word 'test'
+Find out if a program is available:
+* which curl
+  /usr/bin/curl
+* If the program isn't available the output will be blank.
+Downloading a file
+* curl is used to interact with URLs
+* cat is only useful for small files, the contents of which can fit on screen
+* use curl for larger Files
+* curl -OL https:/cdn.learnenough.com/sonnets.txt
+Bang Bang
+* Running !! runs the previous command
+* !curl runs the last command that started with the word curl
+* ^r allows you to interactively search through your previous commands
+File Content Summary
+* head will fetch the first 10 lines of the file and print to screen
+* tail will fetch the last 10 lines of the file and print to screen
+* wc will tell you the the number of lines, words and bytes, in that order
+The Pipeline Operator
+* We can use the pipeline operator | to redirect the output of one command into
+  another
+** head myFile.txt | WC will find the word count on the head of myFile
+** ls -l ~ | grep _ will find all the files in your home directory with an
+   underscore.
+* ls -l ~ | grep _ > store.txt will write the outputs to store.txt
+* head -n 20 testFile.txt | tail -n 10 will print lines 10-20 of your file
+* ping testSite.com > testLog.log will continuously ping the testSite server and
+  output the results to the log file.
+* tail -f testLog.log will continously update the screen as more lines are added
+  to the end of testLog.log. Monitoring log files (e.g. of a server) like this
+  is a common use of the tail command.
+Less
+* one of two utilities to look at the whole file. The other is more.
+* ^f/Spacebar will move forward a page
+* ^b will move back a page
+* / will let you search for a word and use n/N to move back and forth
+* man pages use less
+* <n>g jumps to line number n
+Terminating unwanted processes
+* User and system tasks take place in a container called a process
+* to see all processes, us the ps (short for process status) command with the
+  aux option. ps options don't take a -
+  E.g. Say you want to kill a process called spring:
+  ps aux | grep spring
+  Among other things, this will return the process id (pid). Say it's 12241:
+  kill -15 12241
+  Here 15 is the Unix terminate code. You can use the above to kill rogue
+  processes.
+* You can also kill all processes with the name 'spring' using:
+  pkill -15 -f spring
+* The top command finds the processes consuming the most resources
+* Any time a process is frozen (or misbehaving) run ps aux or top to see what's
+  going on
+Grep
+* grep -in "rose" Sonnet.txt will find all instances of "rose" in Sonnet.txt,
+  ignoring cases and printing line numbers in front
+* grep -inv "rose" will do the opposite of the above - find lines without rose
+* grep rose sonnets.txt | wc will find the number of occurrances of that word
+* grep takes a recursive option, -r, to include subdirectories in its search
+History
+* The history command prints all the commands you've used in that terminal
+* history | less will allow you to scroll through them using the less utility
+Directories
+* /User/ is a user directory whereas /usr/ is a system directory
+* all unix directories are subdirectories of the root directory / (slash)
+* the home directory can be specified as an absolute path /home/rcontrac/, or as
+  ~/
+* System directories contain programs essential for the computer's normal
+  operation. Superuser or root privilages are needed to modify system files.
+* cd - will go back to the previous directory
+Find
+* Like the grep command. Very powerful.
+* find . -name '*.txt' finds all text files in the current directory and then
+  its subdirectories.
+Open
+* xdg-open <filename> will open the file using the default program
+Chaining commands
+* <command_1> && <command_2> - if command_1 succeeds then run command_1
+* <command_1>; <command_2> - run command_2 after command_1 regardless of
+  whether command_1 succeeded
